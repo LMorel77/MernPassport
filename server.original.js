@@ -4,34 +4,28 @@ const passport = require("passport");
 const session = require("express-session");
 const bodyParser = require("body-parser");
 const logger = require("morgan")("tiny");
+const mongoose = require("mongoose");
 
-// Luis: Removing Mongoose
-// const mongoose = require("mongoose");
-
-// Luis: Requiring ./models
-const db = require("./models");
-
-const { auth } = require("./controllers");
+const {auth} = require("./controllers");
 
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-// Luis: Removing Mongoose
-// mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/my-first-mern");
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/my-first-mern"
+);
 
 //#region MIDDLEWARE
 
 //body-parser
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({extended: true}));
 
 //passport
 app.use(session({ secret: "keyboard cat", resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Luis: morgan and tiny node packages
-// Not sure what 'logger' is for so leaving it in for now
 app.use(logger);
 
 //controllers
@@ -46,18 +40,10 @@ if (process.env.NODE_ENV === "production") {
 
 // Send every request to the React app
 // Define any API routes before this runs
-app.get("*", function (req, res) {
+app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-// Original Express Server Launch Code
-// app.listen(PORT, function() {
-//   console.log(`🌎 ==> Server now on port ${PORT}!`);
-// });
-
-// Updated Express Server Launch Code (with sequelize)
-db.sequelize.sync().then(function () {
-  app.listen(PORT, function () {
-    console.log(`🌎 ==> Server listening on port: ${PORT}!`);
-  });
+app.listen(PORT, function() {
+  console.log(`🌎 ==> Server now on port ${PORT}!`);
 });

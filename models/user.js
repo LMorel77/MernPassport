@@ -1,42 +1,71 @@
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
+// Requiring bcrypt-nodejs for password hashing\security.
+var bcrypt = require("bcrypt-nodejs");
 
-// Save a reference to the Schema constructor
-var Schema = mongoose.Schema;
+// User Model
+module.exports = function (sequelize, DataTypes) {
 
-// Using the Schema constructor, create a new UserSchema object
-// This is similar to a Sequelize model
-var UserSchema = new Schema({
-  // `name` must be unique and of type String
-  email: {
-    type: String,
-    unique: true
-  },
-  // `notes` is an array that stores ObjectIds
-  // The ref property links these ObjectIds to the Note model
-  // This allows us to populate the User with any associated Notes
-  password: {
-      // Store ObjectIds in the array
-      type: String
+  // User Definition
+  var User = sequelize.define("User", {
+
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+      validate: { isEmail: true }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    occupation: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    relationshipType: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    location: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    
+    imageUrl: {
+      type: DataTypes.STRING,
+    },
+    bio: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
-});
 
-UserSchema.pre("save", function(next) {
-  this.hashPassword();
-  next();
-});
+  }); // End of User Definition
 
-UserSchema.methods.hashPassword = function(){
-  const hash = bcrypt.hashSync(this.password, 10);
-  this.password = hash;
-}
+  // Associating User with Post Model
+  User.associate = function (models) {
 
-UserSchema.methods.validPassword = function(password){
-  return bcrypt.compareSync(password, this.password);
-}
+    User.hasMany(models.Post, { onDelete: "CASCADE", hooks: true });
 
-// This creates our model from the above schema, using mongoose's model method
-var User = mongoose.model("User", UserSchema);
+  };
 
-// Export the User model
-module.exports = User;
+  // User Model Password Validation
+  User.prototype.validPassword = function (password) {
+
+    return bcrypt.compareSync(password, this.password);
+
+  };
+
+  // Hooks method automatically runs during various phases of the User Model lifecycle.
+  // In this case, before a User is created, we will automatically hash their password
+  User.hook("beforeCreate", function (user) {
+
+    user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
+
+  });
+
+  return User;
+
+}; // End User Model
