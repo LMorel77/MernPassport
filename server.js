@@ -5,7 +5,7 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const logger = require("morgan")("tiny");
 
-// Luis: Removing Mongoose
+// Luis: Removing Original Franklin Mongoose Code
 // const mongoose = require("mongoose");
 
 // Luis: Requiring ./models
@@ -16,7 +16,7 @@ const { auth } = require("./controllers");
 const PORT = process.env.PORT || 3001;
 const app = express();
 
-// Luis: Removing Mongoose
+// Luis: Removing Original Franklin Mongoose Code
 // mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/my-first-mern");
 
 //#region MIDDLEWARE
@@ -50,7 +50,7 @@ app.get("*", function (req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 
-// Original Express Server Launch Code
+// Original Franklin Express Server Launch Code
 // app.listen(PORT, function() {
 //   console.log(`🌎 ==> Server now on port ${PORT}!`);
 // });

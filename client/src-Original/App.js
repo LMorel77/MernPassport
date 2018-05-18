@@ -1,12 +1,9 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Redirect } from "react-router-dom";
+import {Navbar, Home, SignupForm, Login} from "./components";
 import API from "./utils/API";
-// Luis: Original Franklin Import
-// import {Navbar, Home, SignupForm, Login} from "./components";
-// Luis: Modified Imports
 
-
-class App extends React.Component {
+class App extends Component {
   state = {
     loggedIn: false,
     user: null,

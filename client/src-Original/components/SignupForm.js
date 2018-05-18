@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import {Col, Row, Wrapper} from "./BootstrapGrid"
+import {Wrapper, Row, Col} from "./BootstrapGrid"
 import API from "../utils/API";
 
 const styles = {

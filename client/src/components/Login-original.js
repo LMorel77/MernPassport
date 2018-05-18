@@ -1,22 +1,22 @@
-import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
-import {Col, Row, Wrapper} from "./BootstrapGrid"
+import React, {Component} from "react"
+import { Redirect } from "react-router-dom"
+import { Wrapper, Row, Col } from "./BootstrapGrid";
 import API from "../utils/API";
 
 const styles = {
   header: {
-    color: "orange",
+    color: "purple",
     borderStyle: "solid",
     borderWidth: "1px",
     textAlign: "center"
   }
 }
 
-class SignupForm extends Component {
+class Login extends Component{ 
   state = {
-    redirectTo:"",
     email: "",
-    password: ""
+    password: "",
+    redirectTo: ""
   }
 
   handleInputChange = event => {
@@ -24,12 +24,16 @@ class SignupForm extends Component {
     this.setState({[name]: value})
   };
 
-  handleSignUp = event => {
+  handleLogin = event => {
     event.preventDefault();
-    API.signUp({ email: this.state.email, password: this.state.password})
-    .then(() => this.setState({
-      redirectTo: "/login"
-    }));
+    API.login({ email: this.state.email, password: this.state.password})
+    .then((res) => {
+        console.log("RES", res);
+        this.props.setUser(res.data)
+        this.setState({
+          redirectTo: "/"
+        });
+      });
   }
 
   render(){
@@ -40,7 +44,7 @@ class SignupForm extends Component {
       <Wrapper>
         <Row>
           <Col>
-            <h1 style={styles.header}>Signup Form</h1>
+            <h1 style={styles.header}>Login</h1>
           </Col>
         </Row>
         <Row>
@@ -61,12 +65,12 @@ class SignupForm extends Component {
         </Row>
         <Row>
           <Col span={2} offset={3}>
-            <button onClick={this.handleSignUp}>Submit</button>
+            <button onClick={this.handleLogin}>Submit</button>
           </Col>
         </Row>
       </Wrapper>
-    )
+    );
   }
 }
 
-export default SignupForm;
+export default Login;
