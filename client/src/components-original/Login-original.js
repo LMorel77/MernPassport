@@ -1,6 +1,6 @@
-import React, {Component} from "react"
+import React from "react"
 import { Redirect } from "react-router-dom"
-import { Wrapper, Row, Col } from "./BootstrapGrid";
+import { Col, Row, Wrapper } from "../components/BootstrapGrid";
 import API from "../utils/API";
 
 const styles = {
@@ -12,7 +12,7 @@ const styles = {
   }
 }
 
-class Login extends Component{ 
+class Login extends React.Component{ 
   state = {
     email: "",
     password: "",

@@ -1,1 +1,1 @@
-export { default as Feed } from "./Feed.js";
+export { default } from "./Feed.js";

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Wrapper, Row, Col} from "./BootstrapGrid";
+import { Col, Row, Wrapper } from "./BootstrapGrid";
 
 const styles = {
   header: {

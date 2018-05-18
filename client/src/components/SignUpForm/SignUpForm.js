@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
-import {Col, Row, Wrapper} from "./BootstrapGrid"
-import API from "../utils/API";
+import {Col, Row, Wrapper} from "../BootstrapGrid"
+import "./SignUpForm.css"; // Sign-Up Form CSS
+import API from "../../utils/API";
 
 const styles = {
   header: {
@@ -12,7 +13,7 @@ const styles = {
   }
 }
 
-class SignupForm extends Component {
+class SignUpForm extends Component {
   state = {
     redirectTo:"",
     email: "",
@@ -69,4 +70,4 @@ class SignupForm extends Component {
   }
 }
 
-export default SignupForm;
+export default SignUpForm;
