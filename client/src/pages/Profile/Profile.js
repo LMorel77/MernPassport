@@ -7,7 +7,7 @@ const Profile = () => (
 
     <Wrapper>
 
-        <h1>Profile Page.</h1>
+        <h1>Profile Page</h1>
         <br />
         <h4>Route: '/profile'</h4>
         <h4>Rendering:

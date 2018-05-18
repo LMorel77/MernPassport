@@ -1,1 +1,33 @@
 /* NavBar Styling */
+
+/* NavBar Links Styling */
+.navbar a {
+    color: rgba(0,0,0,.5);
+    padding: 10px;
+    text-decoration: none;
+}
+
+.navbar a:hover {
+    background-color: purple;
+    color: white !important;
+}
+
+.navbar-nav li {
+    padding: 10px;
+}
+
+/* .navbar-nav li:hover {
+    background-color: purple;
+    color: white;
+} */
+/* 
+.nav-item a:hover {
+    background-color: purple;
+    color: white;
+}
+
+.nav-item .nav-link:hover {
+    background-color: purple;
+    color: white;
+    text-decoration-color: white;
+} */

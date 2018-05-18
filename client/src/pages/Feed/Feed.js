@@ -7,7 +7,7 @@ const Feed = () => (
 
     <Wrapper>
 
-        <h1>Feed Page.</h1>
+        <h1>Feed Page</h1>
         <br />
         <h4>Route: '/feed'</h4>
         <h4>Rendering:

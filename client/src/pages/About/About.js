@@ -8,7 +8,7 @@ const About = () => (
 
     <Wrapper>
 
-        <h1>About Page.</h1>
+        <h1>About Page</h1>
         <br />
         <h4>Route: '/about'</h4>
         <h4>Rendering:
